@@ -6,7 +6,7 @@ import 'package:timezone/data/latest.dart' as tzi;
 import 'package:timezone/timezone.dart' as tz;
 
 class AnimatedAnalogClock extends StatefulWidget {
-  final double size;
+  final double? size;
   final String? location;
   final Color? backgroundColor;
   final Gradient? backgroundGradient;
@@ -20,7 +20,7 @@ class AnimatedAnalogClock extends StatefulWidget {
   /// animated analog clock
   const AnimatedAnalogClock({
     super.key,
-    required this.size,
+    this.size,
     this.backgroundColor,
     this.backgroundGradient,
     this.hourHandColor,
@@ -87,8 +87,8 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.size,
-      height: widget.size,
+      width: widget.size ?? MediaQuery.of(context).size.height * 0.3,
+      height: widget.size ?? MediaQuery.of(context).size.height * 0.3,
       child: Transform.rotate(
         angle: -pi / 2,
         child: ValueListenableBuilder(
