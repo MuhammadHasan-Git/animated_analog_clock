@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class AnalogClockPainter extends CustomPainter {
-  final DateTime dateTime;
   final Animation<double> hourAnimation;
   final Animation<double> minuteAnimation;
   final Animation<double> secondAnimation;
@@ -16,11 +15,9 @@ class AnalogClockPainter extends CustomPainter {
   final Color? centerDotColor;
 
   final BuildContext context;
-  // static const primary = Theme.of(context).colorScheme.primary;
   AnalogClockPainter({
     super.repaint,
     required this.context,
-    required this.dateTime,
     required this.hourAnimation,
     required this.minuteAnimation,
     required this.secondAnimation,

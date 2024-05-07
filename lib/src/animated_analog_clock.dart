@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:math';
 import 'package:animated_analog_clock/src/analog_clock_painter.dart';
 import 'package:flutter/material.dart';
+import 'package:timezone/data/latest.dart' as tzi;
+import 'package:timezone/timezone.dart' as tz;
 
 class AnimatedAnalogClock extends StatefulWidget {
   final double size;
-  final DateTime? clockTime;
+  final String? location;
   final Color? backgroundColor;
   final Gradient? backgroundGradient;
   final Color? hourHandColor;
@@ -16,18 +18,19 @@ class AnimatedAnalogClock extends StatefulWidget {
   final Color? centerDotColor;
 
   /// animated analog clock
-  const AnimatedAnalogClock(
-      {super.key,
-      required this.size,
-      this.backgroundColor,
-      this.backgroundGradient,
-      this.hourHandColor,
-      this.minuteHandColor,
-      this.secondHandColor,
-      this.hourIndicatorColor,
-      this.minuteIndicatorColor,
-      this.centerDotColor,
-      this.clockTime});
+  const AnimatedAnalogClock({
+    super.key,
+    required this.size,
+    this.backgroundColor,
+    this.backgroundGradient,
+    this.hourHandColor,
+    this.minuteHandColor,
+    this.secondHandColor,
+    this.hourIndicatorColor,
+    this.minuteIndicatorColor,
+    this.centerDotColor,
+    this.location,
+  });
 
   @override
   State<AnimatedAnalogClock> createState() => _AnimatedAnalogClockState();
@@ -36,8 +39,17 @@ class AnimatedAnalogClock extends StatefulWidget {
 class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
     with TickerProviderStateMixin, ChangeNotifier {
   Timer? timer;
-  late ValueNotifier<DateTime> currentTime =
-      ValueNotifier(widget.clockTime ?? DateTime.now());
+  DateTime get locationTime {
+    if (widget.location != null) {
+      var detroit = tz.getLocation(widget.location!);
+      var now = tz.TZDateTime.now(detroit);
+      return now;
+    } else {
+      return DateTime.now();
+    }
+  }
+
+  late ValueNotifier<DateTime> currentTime = ValueNotifier(locationTime);
   late AnimationController hourAnimationController;
   late AnimationController minuteAnimationController;
   late AnimationController secondAnimationController;
@@ -45,12 +57,13 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
   void startClockTime() {
     timer = Timer.periodic(
       const Duration(milliseconds: 10),
-      (timer) => currentTime.value = DateTime.now(),
+      (timer) => currentTime.value = locationTime,
     );
   }
 
   @override
   void initState() {
+    tzi.initializeTimeZones();
     startClockTime();
     hourAnimationController = AnimationController(
       vsync: this,
@@ -83,7 +96,6 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
           builder: (context, value, child) => CustomPaint(
             painter: AnalogClockPainter(
               context: context,
-              dateTime: currentTime.value,
               hourAnimation: Tween<double>(begin: 0, end: 360)
                   .animate(hourAnimationController),
               minuteAnimation: Tween<double>(begin: 0, end: 360)
