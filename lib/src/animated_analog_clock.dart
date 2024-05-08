@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:animated_analog_clock/src/analog_clock_painter.dart';
 import 'package:flutter/material.dart';
-import 'package:timezone/data/latest.dart' as tzi;
+
+import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class AnimatedAnalogClock extends StatefulWidget {
@@ -37,33 +38,18 @@ class AnimatedAnalogClock extends StatefulWidget {
 }
 
 class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
-    with TickerProviderStateMixin, ChangeNotifier {
+    with TickerProviderStateMixin {
   Timer? timer;
-  DateTime get locationTime {
-    if (widget.location != null) {
-      var detroit = tz.getLocation(widget.location!);
-      var now = tz.TZDateTime.now(detroit);
-      return now;
-    } else {
-      return DateTime.now();
-    }
-  }
-
-  late ValueNotifier<DateTime> currentTime = ValueNotifier(locationTime);
+  late ValueNotifier<DateTime> currentTime;
   late AnimationController hourAnimationController;
   late AnimationController minuteAnimationController;
   late AnimationController secondAnimationController;
 
-  void startClockTime() {
-    timer = Timer.periodic(
-      const Duration(milliseconds: 10),
-      (timer) => currentTime.value = locationTime,
-    );
-  }
-
   @override
   void initState() {
-    tzi.initializeTimeZones();
+    super.initState();
+    tz.initializeTimeZones();
+    currentTime = ValueNotifier(locationTime);
     startClockTime();
     hourAnimationController = AnimationController(
       vsync: this,
@@ -81,7 +67,33 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
       duration: const Duration(seconds: 60),
       value: currentTime.value.second / 60.0,
     )..repeat();
-    super.initState();
+  }
+
+  DateTime get locationTime {
+    if (widget.location != null) {
+      var detroit = tz.getLocation(widget.location!);
+      var now = tz.TZDateTime.now(detroit);
+      return now;
+    } else {
+      return DateTime.now();
+    }
+  }
+
+  void startClockTime() {
+    timer = Timer.periodic(
+      const Duration(milliseconds: 10),
+      (timer) => currentTime.value = locationTime,
+    );
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    currentTime.dispose();
+    hourAnimationController.dispose();
+    minuteAnimationController.dispose();
+    secondAnimationController.dispose();
+    super.dispose();
   }
 
   @override
