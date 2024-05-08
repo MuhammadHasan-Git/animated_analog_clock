@@ -1,3 +1,3 @@
-## 0.0.1
+## [0.0.1] - 2024-5-9
 
-* TODO: Describe initial release.
+* Initial release of the animated_analog_clock package.
