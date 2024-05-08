@@ -2,23 +2,41 @@ import 'dart:async';
 import 'dart:math';
 import 'package:animated_analog_clock/src/analog_clock_painter.dart';
 import 'package:flutter/material.dart';
-
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class AnimatedAnalogClock extends StatefulWidget {
+  /// If this property is null then [AnalogClockState.size] value is [MediaQuery.of(context).size.height * 0.3].
   final double? size;
+
+  /// If null, current location use for the timezone [DateTime.now()]
   final String? location;
+
+  /// If null, [Colors.transparent] is use
   final Color? backgroundColor;
+
+  /// To add Gradient color in clock face background
   final Gradient? backgroundGradient;
+
+  /// If null, [Theme.of(context).colorScheme.primary] color is used
   final Color? hourHandColor;
+
+  /// If null, [Theme.of(context).colorScheme.primary] color is used
   final Color? minuteHandColor;
+
+  /// If null, [Color(0xFFfa1e1e)] color is used
   final Color? secondHandColor;
+
+  /// If null, [Theme.of(context).colorScheme.primary] color is used
   final Color? hourIndicatorColor;
+
+  /// If null, [Colors.grey] color is used
   final Color? minuteIndicatorColor;
+
+  /// change the color of the center dot of clock face default color [Color(0xFFfa1e1e)]
   final Color? centerDotColor;
 
-  /// animated analog clock
+  /// Animated Analog Clock Widget
   const AnimatedAnalogClock({
     super.key,
     this.size,
@@ -69,6 +87,7 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
     )..repeat();
   }
 
+  /// getter for getting specified location timezone
   DateTime get locationTime {
     if (widget.location != null) {
       var detroit = tz.getLocation(widget.location!);
@@ -79,6 +98,7 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
     }
   }
 
+  /// update the clcok time in every 10 milliseconds
   void startClockTime() {
     timer = Timer.periodic(
       const Duration(milliseconds: 10),

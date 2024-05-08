@@ -1,9 +1,5 @@
 name: animated_analog_clock
-description:
-  "A customizable and animated analog clock widget for Flutter applications.
-  This package provides a fully customizable analog clock widget that supports
-  animation for smooth transitions of clock hands. Users can customize various
-  aspects of the clock including size, colors, background, and more."
+description: "A customizable and animated analog clock widget for Flutter applications."
 
 version: 0.0.1
 homepage: https://github.com/MuhammadHasan-Git/animated_analog_clock
