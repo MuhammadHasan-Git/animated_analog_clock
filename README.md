@@ -7,9 +7,9 @@ This package provides a fully customizable analog clock widget that supports
 animation for smooth transitions of clock hands. Users can customize various
 aspects of the clock including size, colors, background, and more.
 
-![Flutter Analog Clock Screenshot](https://github.com/MuhammadHasan-Git/animated_analog_clock/blob/main/screenshots/animated_analog_clock_dark.gif)
+![Flutter Analog Clock Screenshot](https://github.com/MuhammadHasan-Git/animated_analog_clock/raw/main/screenshots/animated_analog_clock_dark.gif)
 &nbsp;
-![Flutter Analog Clock Screenshot](https://github.com/MuhammadHasan-Git/animated_analog_clock/blob/main/screenshots/animated_analog_clock_light.gif)
+![Flutter Analog Clock Screenshot](https://github.com/MuhammadHasan-Git/animated_analog_clock/raw/main/screenshots/animated_analog_clock_light.gif)
 
 ## Installation
 
