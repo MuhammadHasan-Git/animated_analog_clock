@@ -1,6 +1,6 @@
 # Flutter Animated Analog Clock
 
-[![pub package](https://img.shields.io/badge/pub-v0.0.1-orange)](https://pub.dev/packages/animated_analog_clock)
+[![pub package](https://img.shields.io/badge/pub-v0.0.2-orange)](https://pub.dev/packages/animated_analog_clock)
 
 A customizable and animated analog clock widget.
 This package provides a fully customizable analog clock widget that supports
