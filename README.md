@@ -17,7 +17,7 @@ In your `pubspec.yaml` file of your Flutter Project, add the following dependenc
 
 ```yaml
 dependencies:
-  analog_clock: ^0.0.1
+  analog_clock: ^0.0.2
 ```
 
 ## Import
