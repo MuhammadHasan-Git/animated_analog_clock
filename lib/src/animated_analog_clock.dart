@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:math';
-import 'package:animated_analog_clock/src/analog_clock_painter.dart';
+import 'package:animated_analog_clock/src/widgets/clock_face.dart';
+import 'package:animated_analog_clock/src/dial_type.dart';
 import 'package:flutter/material.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -10,10 +10,12 @@ class AnimatedAnalogClock extends StatefulWidget {
   final double? size;
 
   /// If null, current location use for the timezone [DateTime.now()]
+  ///
+  /// Check out the timezone names from [this link](https://help.syncfusion.com/flutter/calendar/timezone).
   final String? location;
 
   /// If null, [Colors.transparent] is use
-  final Color? backgroundColor;
+  final Color backgroundColor;
 
   /// To add Gradient color in clock face background
   final Gradient? backgroundGradient;
@@ -25,67 +27,63 @@ class AnimatedAnalogClock extends StatefulWidget {
   final Color? minuteHandColor;
 
   /// If null, [Color(0xFFfa1e1e)] color is used
-  final Color? secondHandColor;
+  final Color secondHandColor;
 
-  /// If null, [Theme.of(context).colorScheme.primary] color is used
-  final Color? hourIndicatorColor;
+  /// If null, [Colors.black] color is used
+  final Color? hourDashColor;
 
   /// If null, [Colors.grey] color is used
-  final Color? minuteIndicatorColor;
+  final Color? minuteDashColor;
 
   /// change the color of the center dot of clock face default color [Color(0xFFfa1e1e)]
   final Color? centerDotColor;
+
+  /// If null, [DialType.dashes] is used
+  final DialType dialType;
+
+  /// If null, [true] is used
+  final bool showSecondHand;
+
+  /// If null, [Colors.white] color is used
+  final Color? numberColor;
+
+  /// If null, [false] is used
+  final bool? extendSecondHand;
+
+  /// If null, [false] is used
+  final bool? extendMinuteHand;
+
+  /// If null, [false] is used
+  final bool? extendHourHand;
 
   /// Animated Analog Clock Widget
   const AnimatedAnalogClock({
     super.key,
     this.size,
-    this.backgroundColor,
+    this.backgroundColor = Colors.transparent,
     this.backgroundGradient,
     this.hourHandColor,
     this.minuteHandColor,
-    this.secondHandColor,
-    this.hourIndicatorColor,
-    this.minuteIndicatorColor,
+    this.secondHandColor = const Color(0xFFfa1e1e),
+    this.hourDashColor,
+    this.minuteDashColor,
     this.centerDotColor,
     this.location,
+    this.dialType = DialType.dashes,
+    this.showSecondHand = true,
+    this.numberColor,
+    this.extendMinuteHand,
+    this.extendHourHand,
+    this.extendSecondHand,
   });
 
   @override
   State<AnimatedAnalogClock> createState() => _AnimatedAnalogClockState();
 }
 
-class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
-    with TickerProviderStateMixin {
+class _AnimatedAnalogClockState extends State<AnimatedAnalogClock> {
   Timer? timer;
   late ValueNotifier<DateTime> currentTime;
-  late AnimationController hourAnimationController;
-  late AnimationController minuteAnimationController;
-  late AnimationController secondAnimationController;
-
-  @override
-  void initState() {
-    super.initState();
-    tz.initializeTimeZones();
-    currentTime = ValueNotifier(locationTime);
-    startClockTime();
-    hourAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(hours: 12),
-      value: (currentTime.value.hour % 12.0 + currentTime.value.minute / 60.0) /
-          12.0,
-    )..repeat();
-    minuteAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(minutes: 60),
-      value: currentTime.value.minute / 60.0,
-    )..repeat();
-    secondAnimationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 60),
-      value: currentTime.value.second / 60.0,
-    )..repeat();
-  }
 
   /// getter for getting specified location timezone
   DateTime get locationTime {
@@ -98,53 +96,52 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock>
     }
   }
 
-  /// update the clcok time in every 10 milliseconds
+  /// update the clock time in every 10 milliseconds
   void startClockTime() {
     timer = Timer.periodic(
-      const Duration(milliseconds: 10),
+      const Duration(milliseconds: 16),
       (timer) => currentTime.value = locationTime,
     );
   }
 
   @override
+  void initState() {
+    super.initState();
+    tz.initializeTimeZones();
+    currentTime = ValueNotifier(locationTime);
+    startClockTime();
+  }
+
+  @override
   void dispose() {
     timer?.cancel();
-    currentTime.dispose();
-    hourAnimationController.dispose();
-    minuteAnimationController.dispose();
-    secondAnimationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: widget.size ?? MediaQuery.of(context).size.height * 0.3,
-      height: widget.size ?? MediaQuery.of(context).size.height * 0.3,
-      child: Transform.rotate(
-        angle: -pi / 2,
-        child: ValueListenableBuilder(
-          valueListenable: currentTime,
-          builder: (context, value, child) => CustomPaint(
-            painter: AnalogClockPainter(
-              context: context,
-              hourAnimation: Tween<double>(begin: 0, end: 360)
-                  .animate(hourAnimationController),
-              minuteAnimation: Tween<double>(begin: 0, end: 360)
-                  .animate(minuteAnimationController),
-              secondAnimation: Tween<double>(begin: 0, end: 360)
-                  .animate(secondAnimationController),
-              hourHandColor: widget.hourHandColor,
-              minuteHandColor: widget.minuteHandColor,
-              secondHandColor: widget.secondHandColor,
-              hourIndicatorColor: widget.hourIndicatorColor,
-              minuteIndicatorColor: widget.minuteIndicatorColor,
-              backgroundColor: widget.backgroundColor,
-              backgroundGradient: widget.backgroundGradient,
-              centerDotColor: widget.centerDotColor,
-            ),
-          ),
-        ),
+    return ValueListenableBuilder(
+      valueListenable: currentTime,
+      builder: (context, value, child) => ClockFace(
+        clockSize: widget.size ?? MediaQuery.of(context).size.height * 0.3,
+        currentTime: currentTime.value,
+        hourHandColor:
+            widget.hourHandColor ?? Theme.of(context).colorScheme.primary,
+        minuteHandColor:
+            widget.minuteHandColor ?? Theme.of(context).colorScheme.primary,
+        secondHandColor: widget.secondHandColor,
+        centerDotColor:
+            widget.centerDotColor ?? Theme.of(context).colorScheme.primary,
+        hourDashColor: widget.hourDashColor,
+        minuteDashColor: widget.minuteDashColor,
+        backgroundColor: widget.backgroundColor,
+        backgroundGradient: widget.backgroundGradient,
+        dialType: widget.dialType,
+        showSecondHand: widget.showSecondHand,
+        numberColor: widget.numberColor,
+        extendSecondHand: widget.extendSecondHand ?? true,
+        extendMinuteHand: widget.extendMinuteHand ?? false,
+        extendHourHand: widget.extendHourHand ?? false,
       ),
     );
   }
