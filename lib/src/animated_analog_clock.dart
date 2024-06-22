@@ -14,21 +14,31 @@ class AnimatedAnalogClock extends StatefulWidget {
   /// Check out the timezone names from [this link](https://help.syncfusion.com/flutter/calendar/timezone).
   final String? location;
 
+  /// change background color of clock face
+  /// 
   /// If null, [Colors.transparent] is use
   final Color backgroundColor;
 
   /// To add Gradient color in clock face background
   final Gradient? backgroundGradient;
 
+  /// Property to change hour hand color
+  /// 
   /// If null, [Theme.of(context).colorScheme.primary] color is used
   final Color? hourHandColor;
 
+  /// Property to change minute hand color
+  /// 
   /// If null, [Theme.of(context).colorScheme.primary] color is used
   final Color? minuteHandColor;
 
+  /// Property to change second hand color
+  /// 
   /// If null, [Color(0xFFfa1e1e)] color is used
   final Color secondHandColor;
 
+  /// Property to change dial hour dash color
+  /// 
   /// If null, [Colors.black] color is used
   final Color? hourDashColor;
 
@@ -38,23 +48,38 @@ class AnimatedAnalogClock extends StatefulWidget {
   /// change the color of the center dot of clock face default color [Color(0xFFfa1e1e)]
   final Color? centerDotColor;
 
+  /// Property to change dial number style
+  /// 
   /// If null, [DialType.dashes] is used
   final DialType dialType;
 
+  /// Property to show or hide the seconds hand
+  /// 
   /// If null, [true] is used
   final bool showSecondHand;
 
+  /// Property to change dial number color
+  /// 
   /// If null, [Colors.white] color is used
   final Color? numberColor;
 
+  /// Property to show or hide the seconds hand
+  /// 
   /// If null, [false] is used
   final bool? extendSecondHand;
 
+  /// Property to extend second hand
+  /// 
   /// If null, [false] is used
   final bool? extendMinuteHand;
 
+  /// Property to extend hour hand
+  /// 
   /// If null, [false] is used
   final bool? extendHourHand;
+
+  /// Property to specify the duration for updating the time
+  final Duration? updateInterval;
 
   /// Animated Analog Clock Widget
   const AnimatedAnalogClock({
@@ -75,6 +100,7 @@ class AnimatedAnalogClock extends StatefulWidget {
     this.extendMinuteHand,
     this.extendHourHand,
     this.extendSecondHand,
+    this.updateInterval,
   });
 
   @override
@@ -99,7 +125,10 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock> {
   /// update the clock time in every 10 milliseconds
   void startClockTime() {
     timer = Timer.periodic(
-      const Duration(milliseconds: 16),
+      widget.updateInterval ??
+          (widget.showSecondHand
+              ? const Duration(milliseconds: 16)
+              : const Duration(seconds: 2)),
       (timer) => currentTime.value = locationTime,
     );
   }

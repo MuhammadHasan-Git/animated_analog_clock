@@ -41,7 +41,7 @@ class ClockDashesPainter extends CustomPainter {
     );
 
     if (dialType == DialType.numberAndDashes) {
-      // Draw hour dashes that not contain
+      // Draw hour dashes that not contain [0, 3, 6, 9]
       for (int i = 0; i < 12; i++) {
         if (![0, 3, 6, 9].contains(i)) {
           final angle = 2 * pi * i / 12;
