@@ -21,7 +21,7 @@ class CustomClockExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.appbar('Gradient Animated Clock'),
+      appBar: CustomAppBar.appBar('Gradient Animated Clock'),
       body: const Center(
         child: AnimatedAnalogClock(
           location: 'Australia/Sydney',
@@ -35,7 +35,8 @@ class CustomClockExample extends StatelessWidget {
           minuteHandColor: Colors.white,
           secondHandColor: Colors.lightBlueAccent,
           centerDotColor: Colors.lightBlueAccent,
-          hourIndicatorColor: Colors.lightBlueAccent,
+          hourDashColor: Colors.lightBlueAccent,
+          dialType: DialType.numberAndDashes,
         ),
       ),
     );

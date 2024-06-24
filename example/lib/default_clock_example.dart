@@ -11,7 +11,7 @@ void main() {
           ThemeData(colorScheme: const ColorScheme.dark(primary: Colors.white)),
       theme: ThemeData(
           colorScheme: const ColorScheme.light(primary: Colors.black)),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.light,
     ),
   );
 }
@@ -23,7 +23,7 @@ class DefaultClockExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.appbar('Simple Animated Clock'),
+      appBar: CustomAppBar.appBar('Simple Animated Clock'),
       body: const Center(
         child: AnimatedAnalogClock(),
       ),

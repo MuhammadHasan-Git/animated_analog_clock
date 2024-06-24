@@ -21,17 +21,22 @@ class CustomClockExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.appbar('Customized Animated Clock'),
+      appBar: CustomAppBar.appBar('Customized Animated Clock'),
       body: const Center(
         child: AnimatedAnalogClock(
           location: 'Australia/Darwin',
+          size: 200,
           backgroundColor: Color(0xff1E1E26),
           hourHandColor: Colors.lightBlueAccent,
           minuteHandColor: Colors.lightBlueAccent,
           secondHandColor: Colors.amber,
           centerDotColor: Colors.amber,
-          hourIndicatorColor: Colors.lightBlue,
-          minuteIndicatorColor: Colors.blueAccent,
+          hourDashColor: Colors.lightBlue,
+          minuteDashColor: Colors.blueAccent,
+          dialType: DialType.numbers,
+          numberColor: Colors.blueAccent,
+          extendHourHand: true,
+          extendMinuteHand: true,
         ),
       ),
     );
