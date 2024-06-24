@@ -1,15 +1,36 @@
 # Flutter Animated Analog Clock
 
-[![pub package](https://img.shields.io/badge/pub-v0.0.2-orange)](https://pub.dev/packages/animated_analog_clock)
+[![pub package](https://img.shields.io/badge/pub-v0.1.0-orange)](https://pub.dev/packages/animated_analog_clock)
 
 A customizable and animated analog clock widget.
 This package provides a fully customizable analog clock widget that supports
 animation for smooth transitions of clock hands. Users can customize various
 aspects of the clock including size, colors, background, and more.
 
-![Flutter Analog Clock Screenshot](https://github.com/MuhammadHasan-Git/animated_analog_clock/raw/main/screenshots/animated_analog_clock_dark.gif)
+![Flutter Analog Clock Screenshot](https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/animated_analog_clock.gif)
 &nbsp;
-![Flutter Analog Clock Screenshot](https://github.com/MuhammadHasan-Git/animated_analog_clock/raw/main/screenshots/animated_analog_clock_light.gif)
+
+## Dial Options
+
+### Numbers
+
+<img src="https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/number_dial_mockup.png" alt="Numbers Dial" width="200"/>
+
+### Numbers and Dashes
+
+<img src="https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/NumAndDash.png" alt="Numbers and Dashes Dial" width="200"/>
+
+### Roman Numerals
+
+<img src="https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/roman_dial_mockup.png" alt="Roman Numerals Dial" width="200"/>
+
+### Dashes
+
+<img src="https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/dash_diial_mockup.png" alt="Dashes Dial" width="200"/>
+
+### No Dial
+
+<img src="https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/none_dial_mockup.png" alt="Dashes Dial" width="200"/>
 
 ## Installation
 
@@ -17,7 +38,7 @@ In your `pubspec.yaml` file of your Flutter Project, add the following dependenc
 
 ```yaml
 dependencies:
-  analog_clock: ^0.0.2
+  analog_clock: ^0.1.0
 ```
 
 ## Import
@@ -37,6 +58,8 @@ import 'package:animated_analog_clock/animated_analog_clock.dart';
 - **Timezone Support with Location Specification**: Users can specify a location name, and the clock will display the time according to the timezone associated with that location. To find valid location names for timezones, check out the [this](https://help.syncfusion.com/flutter/calendar/timezone) documentation.
 
 - **Lightweight and Efficient**: The package is designed to be lightweight and efficient, ensuring smooth performance even on devices with limited resources.
+
+- **DialType Enum**: Introduced the `DialType` enum to support different dial options: dashes, numbers, numberAndDashes, and none.
 
 ## Usage
 
@@ -58,8 +81,8 @@ AnimatedAnalogClock(
           minuteHandColor: Colors.lightBlueAccent,
           secondHandColor: Colors.amber,
           centerDotColor: Colors.amber,
-          hourIndicatorColor: Colors.lightBlue,
-          minuteIndicatorColor: Colors.blueAccent,
+          hourDashColor: Colors.lightBlue,
+          minuteDashColor: Colors.blueAccent,
         ),
 ```
 
