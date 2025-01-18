@@ -5,7 +5,7 @@ import 'package:animated_analog_clock/src/widgets/hand.dart';
 import 'package:flutter/material.dart';
 
 class ClockFace extends StatelessWidget {
-  const ClockFace({
+  ClockFace({
     super.key,
     required this.currentTime,
     required this.clockSize,
@@ -23,11 +23,29 @@ class ClockFace extends StatelessWidget {
     required this.extendMinuteHand,
     required this.extendHourHand,
     required this.extendSecondHand,
-  });
+    this.backgroundImage,
+  }) {
+    final hasBackgroundColor = backgroundColor != Colors.transparent;
+    final hasBackgroundGradient = backgroundGradient != null;
+    final hasBackgroundImage = backgroundImage != null;
+
+    final selectedBackgroundCount = [
+      hasBackgroundColor,
+      hasBackgroundGradient,
+      hasBackgroundImage,
+    ].where((element) => element).length;
+
+    assert(
+      selectedBackgroundCount <= 1,
+      'Only one of backgroundColor, backgroundGradient, or backgroundImage should be provided.',
+    );
+  }
+
   final double clockSize;
   final DateTime currentTime;
   final DialType dialType;
   final Color backgroundColor;
+  final ImageProvider<Object>? backgroundImage;
   final Gradient? backgroundGradient;
   final Color hourHandColor;
   final Color minuteHandColor;
@@ -57,6 +75,12 @@ class ClockFace extends StatelessWidget {
             backgroundGradient != null && backgroundColor == Colors.transparent
                 ? backgroundGradient
                 : null,
+        image: backgroundImage != null
+            ? DecorationImage(
+                image: backgroundImage!,
+                fit: BoxFit.cover,
+              )
+            : null,
       ),
       child: Stack(
         alignment: Alignment.center,

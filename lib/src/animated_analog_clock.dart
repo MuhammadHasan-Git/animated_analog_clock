@@ -22,6 +22,9 @@ class AnimatedAnalogClock extends StatefulWidget {
   /// To add Gradient color in clock face background
   final Gradient? backgroundGradient;
 
+  /// To add Gradient color in clock face background
+  final ImageProvider<Object>? backgroundImage;
+
   /// Property to change hour hand color
   ///
   /// If null, [Theme.of(context).colorScheme.primary] color is used
@@ -86,6 +89,7 @@ class AnimatedAnalogClock extends StatefulWidget {
     super.key,
     this.size,
     this.backgroundColor = Colors.transparent,
+    this.backgroundImage,
     this.backgroundGradient,
     this.hourHandColor,
     this.minuteHandColor,
@@ -165,6 +169,7 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock> {
         minuteDashColor: widget.minuteDashColor,
         backgroundColor: widget.backgroundColor,
         backgroundGradient: widget.backgroundGradient,
+        backgroundImage: widget.backgroundImage,
         dialType: widget.dialType,
         showSecondHand: widget.showSecondHand,
         numberColor: widget.numberColor,
