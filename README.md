@@ -1,6 +1,6 @@
 # Flutter Animated Analog Clock
 
-[![pub package](https://img.shields.io/badge/pub-v0.2.0-orange)](https://pub.dev/packages/animated_analog_clock)
+[![pub package](https://img.shields.io/badge/pub-v0.2.1-orange)](https://pub.dev/packages/animated_analog_clock)
 
 A customizable and animated analog clock widget.
 This package provides a fully customizable analog clock widget that supports
@@ -66,7 +66,7 @@ In your `pubspec.yaml` file of your Flutter Project, add the following dependenc
 
 ```yaml
 dependencies:
-  animated_analog_clock: ^0.2.0
+  animated_analog_clock: ^0.2.1
 ```
 
 ## Import

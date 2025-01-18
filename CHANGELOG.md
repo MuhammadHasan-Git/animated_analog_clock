@@ -1,3 +1,8 @@
+## [0.2.1] - 2024-01-19
+
+### Updates
+- **Dependencies**: Updated package dependencies to ensure compatibility with the latest versions.
+
 ## [0.2.0] - 2024-01-18
 
 ### New Features
