@@ -1,3 +1,11 @@
+## [0.2.0] - 2024-01-18
+
+### New Features
+- **Background Image Support**: Added the ability to set an image as the background for the analog clock, enhancing customization options.
+
+### Updates
+- **Dependencies**: Updated package dependencies to ensure compatibility with the latest versions.
+
 ## [0.1.0] - 2024-6-25
 
 - **DialType Enum**: Introduced the `DialType` enum to support different dial options: dashes, numbers, numberAndDashes, and none.

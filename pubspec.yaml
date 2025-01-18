@@ -1,7 +1,7 @@
 name: animated_analog_clock
 description: "A customizable and animated analog clock widget for Flutter applications."
 
-version: 0.1.0
+version: 0.2.0
 homepage: https://github.com/MuhammadHasan-Git/animated_analog_clock
 issue_tracker: https://github.com/MuhammadHasan-Git/animated_analog_clock/issues
 

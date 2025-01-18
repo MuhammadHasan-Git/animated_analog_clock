@@ -1,6 +1,6 @@
 # Flutter Animated Analog Clock
 
-[![pub package](https://img.shields.io/badge/pub-v0.1.0-orange)](https://pub.dev/packages/animated_analog_clock)
+[![pub package](https://img.shields.io/badge/pub-v0.2.0-orange)](https://pub.dev/packages/animated_analog_clock)
 
 A customizable and animated analog clock widget.
 This package provides a fully customizable analog clock widget that supports
@@ -10,7 +10,35 @@ aspects of the clock including size, colors, background, and more.
 ![Flutter Analog Clock Screenshot](https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/animated_analog_clock.gif)
 &nbsp;
 
+## **New in Version 0.2.0**
+
+### Image Dial (New Feature)
+You can now use an **Image Dial** as the clock's face, allowing you to set a background image. This can be a network image or an asset image, making your analog clock even more visually appealing and customizable.
+
+#### Example:  
+```dart
+AnimatedAnalogClock(
+  backgroundImage: NetworkImage(
+    'https://cdn.pixabay.com/photo/2023/12/01/22/27/spiderman-8424632_1280.jpg',
+  ),
+);
+```
+
+Or with an asset image:
+
+```dart
+AnimatedAnalogClock(
+  backgroundImage: AssetImage(
+    'path/to/your/image.png',
+  ),
+);
+```
+
 ## Dial Options
+
+### **Image** (New in Version 0.2.0)
+
+<img src="https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/refs/heads/main/screenshots/image-dial-mockup.png" alt="Image Dial" width="200"/>
 
 ### Numbers
 
@@ -38,7 +66,7 @@ In your `pubspec.yaml` file of your Flutter Project, add the following dependenc
 
 ```yaml
 dependencies:
-  analog_clock: ^0.1.0
+  analog_clock: ^0.2.0
 ```
 
 ## Import
@@ -76,6 +104,14 @@ AnimatedAnalogClock(
           location: 'Australia/Darwin',
           // Gradient Background if you want
           // backgroundGradient: RadialGradient(colors: []),
+          // Set a network image as the background
+          // backgroundImage: NetworkImage(
+          // 'url',
+          // ),
+          // Alternatively, set an asset image as the background
+          // backgroundImage: AssetImage(
+          //   'path/to/your/asset/image.png',
+          // ),
           backgroundColor: Color(0xff1E1E26),
           hourHandColor: Colors.lightBlueAccent,
           minuteHandColor: Colors.lightBlueAccent,
