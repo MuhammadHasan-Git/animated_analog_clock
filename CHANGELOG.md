@@ -1,11 +1,21 @@
+# Changelog
+
+## [0.2.2] - 2025-08-24
+
+### New Features
+
+- Added support for system independent clock
+
 ## [0.2.1] - 2025-01-19
 
 ### Updates
+
 - **Dependencies**: Updated package dependencies to ensure compatibility with the latest versions.
 
 ## [0.2.0] - 2025-01-18
 
 ### New Features
+
 - **Background Image Support**: Added the ability to set an image as the background for the analog clock, enhancing customization options.
 
 ## [0.1.0] - 2024-6-25

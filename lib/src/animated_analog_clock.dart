@@ -9,6 +9,11 @@ class AnimatedAnalogClock extends StatefulWidget {
   /// If this property is null then [AnalogClockState.size] value is [MediaQuery.of(context).size.height * 0.3].
   final double? size;
 
+  /// Change DateTime provider
+  ///
+  /// If null, [DateTime.now()] is used
+  final DateTime Function()? clock;
+
   /// If null, current location use for the timezone [DateTime.now()]
   ///
   /// Check out the timezone names from [this link](https://help.syncfusion.com/flutter/calendar/timezone).
@@ -91,6 +96,7 @@ class AnimatedAnalogClock extends StatefulWidget {
     this.backgroundColor = Colors.transparent,
     this.backgroundImage,
     this.backgroundGradient,
+    this.clock,
     this.hourHandColor,
     this.minuteHandColor,
     this.secondHandColor = const Color(0xFFfa1e1e),
@@ -119,10 +125,16 @@ class _AnimatedAnalogClockState extends State<AnimatedAnalogClock> {
   DateTime get locationTime {
     if (widget.location != null) {
       var detroit = tz.getLocation(widget.location!);
-      var now = tz.TZDateTime.now(detroit);
-      return now;
+      if (widget.clock != null) {
+        return tz.TZDateTime.from(widget.clock!(), detroit);
+      }
+      return tz.TZDateTime.now(detroit);
     } else {
-      return DateTime.now();
+      if (widget.clock != null) {
+        return widget.clock!();
+      } else {
+        return DateTime.now();
+      }
     }
   }
 
