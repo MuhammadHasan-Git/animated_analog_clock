@@ -1,6 +1,6 @@
 # Flutter Animated Analog Clock
 
-[![pub package](https://img.shields.io/badge/pub-v0.2.1-orange)](https://pub.dev/packages/animated_analog_clock)
+[![pub package](https://img.shields.io/badge/pub-v0.2.2orange)](https://pub.dev/packages/animated_analog_clock)
 
 A customizable and animated analog clock widget.
 This package provides a fully customizable analog clock widget that supports
@@ -10,7 +10,7 @@ aspects of the clock including size, colors, background, and more.
 ![Flutter Analog Clock Screenshot](https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/main/screenshots/animated_analog_clock.gif)
 &nbsp;
 
-## **New in Version 0.2.0**
+## **New in Version 0.2.2**
 
 ### Image Dial (New Feature)
 You can now use an **Image Dial** as the clock's face, allowing you to set a background image. This can be a network image or an asset image, making your analog clock even more visually appealing and customizable.
@@ -36,7 +36,7 @@ AnimatedAnalogClock(
 
 ## Dial Options
 
-### **Image** (New in Version 0.2.0)
+### **Image** (New in Version 0.2.2)
 
 <img src="https://raw.githubusercontent.com/MuhammadHasan-Git/animated_analog_clock/refs/heads/main/screenshots/image-dial-mockup.png" alt="Image Dial" width="200"/>
 
@@ -66,7 +66,7 @@ In your `pubspec.yaml` file of your Flutter Project, add the following dependenc
 
 ```yaml
 dependencies:
-  animated_analog_clock: ^0.2.1
+  animated_analog_clock: ^0.2.2
 ```
 
 ## Import
