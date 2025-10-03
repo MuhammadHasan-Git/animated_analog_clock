@@ -112,6 +112,7 @@ AnimatedAnalogClock(
           // backgroundImage: AssetImage(
           //   'path/to/your/asset/image.png',
           // ),
+          clock: () => DateTime.now(),
           backgroundColor: Color(0xff1E1E26),
           hourHandColor: Colors.lightBlueAccent,
           minuteHandColor: Colors.lightBlueAccent,
